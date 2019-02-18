@@ -9,45 +9,46 @@
     >
 
  <el-table-column
-    width="50px"
+    width="35%"
       label="#"
         type="index">
     </el-table-column>
 
     <el-table-column
-    width="100px"
+    width="100%"
       label="Staff Name"
       prop="staffname">
     </el-table-column>
+   
 
  <el-table-column
- width="200px"
+   width="100%"
       label="LOS / Sub Los / Bottom Los"
       prop="los">
     </el-table-column>
 
 
  <el-table-column
-  width="100px"
+  width="100%"
       label="Title"
       prop="title">
     </el-table-column>
 
 
   <el-table-column
-   width="100px"
+  width="90px"
       label="Location"
       prop="location">
     </el-table-column>
 
 <el-table-column
- width="100px"
+   width="70px"
       label="Phone Model"
       prop="pmodel">
     </el-table-column>
 
     <el-table-column
-     width="150px"
+       width="85px"
       label="Computer Model"
       prop="cmodel">
     </el-table-column>
@@ -57,13 +58,13 @@
 
 
         <el-table-column
-         width="100px"
+         width="90px"
       label="Date"
       prop="date">
     </el-table-column>
 
     <el-table-column
-     width="200px"
+      width="100%"
       label="Status"
      >
        <el-tag
@@ -71,27 +72,24 @@
           disable-transitions >{{durum}}</el-tag>
     </el-table-column>
 
-    
 
- <el-table-column
-     width="200px"
-      label="Explanation"
-      prop="explain">
-    </el-table-column>
 
 
 
     
     <el-table-column
-     width="300px"
-      align="right">
-      <template slot="header" slot-scope="scope">
+     width="266px"
+      align="left">
+      <template slot="header" >
         <el-input
           v-model="search"
           size="mini"
           placeholder="Type to search"/>
       </template>
-      <template slot-scope="scope">
+      <template >
+         <el-tag
+          :type="warning"
+          disable-transitions @click="dialogInfo=true" >Details</el-tag>
         <el-button
           size="mini"
             type="primary"
@@ -116,6 +114,20 @@
     <el-button type="success" @click="dialogVisible = false">Confirm</el-button>
   </span>
 </el-dialog>
+
+  <el-dialog
+  title="Information"
+  :visible.sync="dialogInfo"
+  width="30%"
+  :before-close="handleClose">
+  <span><b>Test Details</b></span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogInfo = false" type="success">OK</el-button>
+  </span>
+</el-dialog>
+
+
+
 </div>
 </template>
 
@@ -143,8 +155,9 @@ export default {
         tableData: Array(10).fill(item),
           search: '',
           dialogVisible: false,
-          status:'false',
-           durum: 'not started'
+          status:'',
+           durum: 'not started',
+           dialogInfo:'false'
       }
  
     },

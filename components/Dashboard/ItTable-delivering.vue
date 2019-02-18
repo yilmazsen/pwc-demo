@@ -9,7 +9,7 @@
     >
 
  <el-table-column
-    width="50px"
+    width="35px"
       label="#"
         type="index">
     </el-table-column>
@@ -21,7 +21,7 @@
     </el-table-column>
 
  <el-table-column
- width="200px"
+ width="90px"
       label="LOS / Sub Los / Bottom Los"
       prop="los">
     </el-table-column>
@@ -35,19 +35,19 @@
 
 
   <el-table-column
-   width="100px"
+   width="80px"
       label="Location"
       prop="location">
     </el-table-column>
 
 <el-table-column
- width="100px"
+ width="70px"
       label="Phone Model"
       prop="pmodel">
     </el-table-column>
 
     <el-table-column
-     width="150px"
+     width="90px"
       label="Computer Model"
       prop="cmodel">
     </el-table-column>
@@ -57,13 +57,13 @@
 
 
         <el-table-column
-         width="100px"
+         width="90px"
       label="Date"
       prop="date">
     </el-table-column>
 
     <el-table-column
-     width="200px"
+     width="100px"
       label="Status">
        <el-tag
           :type="warning"
@@ -73,7 +73,7 @@
     
 
  <el-table-column
-     width="200px"
+     width="120px"
       label="Explanation"
       prop="explain">
     </el-table-column>
@@ -81,9 +81,9 @@
 
     
     <el-table-column
-     width="300px"
+     width="260px"
       align="right">
-      <template slot="header" slot-scope="scope">
+      <template slot="header" >
         <el-input
           v-model="search"
           size="mini"
@@ -91,7 +91,10 @@
       </template>
 
       
-      <template slot-scope="scope">
+      <template >
+           <el-tag
+          :type="warning"
+          disable-transitions @click="dialogInfo=true" >Details</el-tag>
         <el-button
           size="mini"
             type="primary"

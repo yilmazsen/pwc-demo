@@ -47,7 +47,7 @@
     </el-table-column>
 
     <el-table-column
-     width="150px"
+     width="90px"
       label="Computer Model"
       prop="cmodel">
     </el-table-column>
@@ -63,7 +63,7 @@
     </el-table-column>
 
     <el-table-column
-     width="200px"
+     width="100px"
       label="Status"
      >
        <el-tag
@@ -74,7 +74,7 @@
     
 
  <el-table-column
-     width="200px"
+     width="110px"
       label="Explanation"
       prop="explain">
     </el-table-column>

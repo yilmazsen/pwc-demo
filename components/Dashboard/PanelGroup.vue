@@ -1,60 +1,69 @@
 <template>
-  <div  style="width: 100%">
-  <el-row :gutter="40" class="panel-group">
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      
-      <div class="card-panel" @click="status = !status , statusI=false,statusF=false,statusD=false ">
-        <div class="card-panel-icon-wrapper icon-people">
-          <div  class="test" >
-           <img src="@/assets/img/icons8-search-property-64.png" alt="">
-          </div> 
+<div>
+
+
+  <el-row   :gutter="40" class="panel-group">
+  
+
+  <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" >
+      <div class="card-panel" @click="statusI = !statusI,status=false,statusF=false,statusD=false " >
+        <div class="card-panel-icon-wrapper icon-message" >
+            <img src="@/assets/img/icons8-search-property-64.png" class="card-panel-icon" />
         </div>
+
+
         <div class="card-panel-description"  >
-          <div class="card-panel-text" >Hazırlanması Gerekenler</div>
+          <div class="card-panel-text">Requests</div>
           <count-to :start-val="0" :end-val="500" :duration="3000" class="card-panel-num"/>
         </div>
       </div>
     </el-col>
+
+
 
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" >
       <div class="card-panel" @click="statusI = !statusI,status=false,statusF=false,statusD=false " >
-        <div class="card-panel-icon-wrapper">
-            <img src="@/assets/img/icons8-workspace-64.png" alt="">
+        <div class="card-panel-icon-wrapper icon-message" >
+            <img src="@/assets/img/icons8-workspace-64.png" class="card-panel-icon" />
         </div>
 
 
         <div class="card-panel-description"  >
-          <div class="card-panel-text">Kurulumda Olanlar </div>
+          <div class="card-panel-text">Workpiece</div>
           <count-to :start-val="0" :end-val="500" :duration="3000" class="card-panel-num"/>
         </div>
       </div>
     </el-col>
+
+
+
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="statusD = !statusD,statusI=false,statusF=false,status=false">
-        <div class="card-panel-icon-wrapper " >
+        <div class="card-panel-icon-wrapper icon-shopping" >
           <img src="@/assets/img/icons8-password-64.png" alt=""/>
         </div>
         <div class="card-panel-description"  >
-          <div class="card-panel-text">Teslim Edilmesi Beklenenler</div>
+          <div class="card-panel-text">Nondelivery</div>
           <count-to :start-val="0" :end-val="500" :duration="3200" class="card-panel-num"/>
         </div>
       </div>
     </el-col>
+    
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="statusF = !statusF,statusI=false,status=false,statusD=false">
-        <div class="card-panel-icon-wrapper">
+        <div class="card-panel-icon-wrapper icon-shopping">
          
-          <img src="@/assets/img/icons8-job-seeker-64.png" alt=""/>
+          <img src="@/assets/img/icons8-job-seeker-64.png" class="card-panel-icon"/>
          
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">Toplam Teslim Edilmiş</div>
+          <div class="card-panel-text">Delivered</div>
           <count-to :start-val="0" :end-val="500" :duration="3600" class="card-panel-num"/>
         </div>
       </div>
     </el-col>
   </el-row>
-
+  
 
 <TransactionTable :status='status'/>
 
@@ -92,10 +101,10 @@ export default {
         tableData: Array(10).fill(item),
           search: '',
           dialogVisible: false,
-          status:'true',
-          statusI:'true',
-          statusD:'true',
-          statusF:'true',
+          status:'false',
+          statusI:'false',
+          statusD:'false',
+          statusF:'false',
            durum: 'not started'
       }
  
@@ -119,13 +128,6 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 
-.test
-{
-  
-  height: 64px;
-  width: 64px;
-}
-
 
 .panel-group {
   margin-top: 18px;
@@ -142,22 +144,15 @@ export default {
     background: #fff;
     box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
     border-color: rgba(0, 0, 0, .05);
-
+    &:hover {
       .card-panel-icon-wrapper {
         color: #fff;
       }
-      
-      .icon-message {
-        background: #36a3f7;
-      }
-      .icon-money {
-        background: #f4516c;
-      }
-      .icon-shopping {
-        background: #34bfa3
-      }
+     
     }
-   
+    .icon-people {
+      color: #40c9c6;
+    }
     .icon-message {
       color: #36a3f7;
     }
@@ -169,10 +164,10 @@ export default {
     }
     .card-panel-icon-wrapper {
       float: left;
-      margin: 14px 0 0 14px;
+
       padding: 16px;
       transition: all 0.38s ease-out;
-      border-radius: 6px;
+      border-radius: 3px;
     }
     .card-panel-icon {
       float: left;
@@ -194,5 +189,5 @@ export default {
       }
     }
   }
-
+}
 </style>
