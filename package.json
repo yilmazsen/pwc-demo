@@ -5,9 +5,9 @@
   "author": "Yilmaz SEN",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "HOST=127.0.0.1 nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "HOST=127.0.0.1 nuxt start",
     "generate": "nuxt generate"
   },
   "dependencies": {
@@ -20,11 +20,17 @@
     "webpack": "^4.29.3"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.14.1",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-vue": "^5.2.2",
+    "node-sass": "^4.11.0",
     "nodemon": "^1.18.9",
+    "prettier": "1.16.4",
     "sass-loader": "^7.1.0",
     "vue-count-to": "^1.0.13",
-    "webpack": "^4.29.3",
-    "node-sass": "^4.11.0"
-
+    "webpack": "^4.29.3"
   }
 }
