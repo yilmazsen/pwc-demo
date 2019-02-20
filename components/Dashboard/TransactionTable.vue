@@ -1,9 +1,7 @@
 <template>
 <div>
   <el-table
-
    border
-   
     :data="tableData"
     style="width: 100%">
 
@@ -36,7 +34,6 @@
       prop="title">
     </el-table-column>
 
-
   <el-table-column
       label="Location"
       prop="location">
@@ -46,17 +43,16 @@
       prop="date">
     </el-table-column>
 
-
-    
     <el-table-column
       align="right">
-      <template slot="header" slot-scope="scope">
+      <template slot="header">
         <el-input
           v-model="search"
           size="mini"
           placeholder="Type to search"/>
       </template>
-      <template slot-scope="scope">
+
+      <template >
         <el-button
           size="mini"
             type="primary"
@@ -74,7 +70,7 @@
   title="Delete Operation"
   :visible.sync="dialogVisible"
   width="30%"
-  :before-close="handleClose">
+  >
   <span><b>Are you sure that you want to delete this record?</b></span>
   <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">Cancel</el-button>
@@ -109,12 +105,6 @@
  
     },
     methods: {
-      handleEdit(index, row) {
-        console.log(index, row);
-      },
-      handleDelete(index, row) {
-        console.log(index, row);
-      },
       handleClose(done) {
         this.$confirm('Are you sure to close this dialog?')
           .then(_ => {

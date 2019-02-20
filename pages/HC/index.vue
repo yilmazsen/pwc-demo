@@ -12,7 +12,6 @@
 
 import PanelGroup from '@/components/Dashboard/PanelGroup.vue'
 import TransactionTable from '@/components/Dashboard/TransactionTable.vue'
-import layout from '@/layouts/index'
 export default {
      layout: 'index',
      components: {

@@ -67,7 +67,7 @@
       label="Status"
      >
        <el-tag
-          :type="warning"
+          v-bind:tag="warning"
           disable-transitions >{{durum}}</el-tag>
     </el-table-column>
 
@@ -85,13 +85,13 @@
     <el-table-column
      width="300px"
       align="right">
-      <template slot="header" slot-scope="scope">
+      <template slot="header">
         <el-input
           v-model="search"
           size="mini"
           placeholder="Type to search"/>
       </template>
-      <template slot-scope="scope">
+      <template >
         <el-button
           size="mini"
             type="primary"
@@ -109,7 +109,7 @@
   title="Delete Operation"
   :visible.sync="dialogVisible"
   width="30%"
-  :before-close="handleClose">
+  >
   <span><b>Are you sure that you want to delete this record?</b></span>
   <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">Cancel</el-button>
@@ -143,19 +143,13 @@ export default {
         tableData: Array(10).fill(item),
           search: '',
           dialogVisible: false,
-          status:'false',
+          
            durum: 'not started'
       }
  
     },
   components: {
     CountTo
-  },
-  methods: {
-    handleSetLineChartData(type) {
-      this.$emit('handleSetLineChartData', type)
-    }
- 
   }
 }
 </script>

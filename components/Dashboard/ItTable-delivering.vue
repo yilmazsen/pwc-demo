@@ -66,7 +66,7 @@
      width="100px"
       label="Status">
        <el-tag
-          :type="warning"
+          v-bind:tag="warning"
           disable-transitions >{{durum}}</el-tag>
     </el-table-column>
 
@@ -112,7 +112,7 @@
   title="Delete Operation"
   :visible.sync="dialogVisible"
   width="30%"
-  :before-close="handleClose">
+  >
   <span><b>Are you sure that you want to delete this record?</b></span>
   <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">Cancel</el-button>
@@ -146,20 +146,16 @@ export default {
         tableData: Array(10).fill(item),
           search: '',
           dialogVisible: false,
-          status:'false',
+         
            durum: 'Pending'
       }
  
     },
   components: {
     CountTo
-  },
-  methods: {
-    handleSetLineChartData(type) {
-      this.$emit('handleSetLineChartData', type)
-    }
- 
   }
+ 
+
 }
 </script>
 

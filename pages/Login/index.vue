@@ -66,7 +66,7 @@ export default
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 @import url(https://fonts.googleapis.com/css?family=Vibur);
 * {
   box-sizing: border-box;

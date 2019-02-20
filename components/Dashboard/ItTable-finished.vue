@@ -67,7 +67,7 @@
       label="Status"
      >
        <el-tag
-          :type="success"
+          v-bind:tag="sucess"
           disable-transitions >{{durum}}</el-tag>
     </el-table-column>
 
@@ -86,12 +86,11 @@
   <el-dialog
   title="Delete Operation"
   :visible.sync="dialogVisible"
-  width="30%"
-  :before-close="handleClose">
+  width="30%">
   <span><b>Are you sure that you want to delete this record?</b></span>
   <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">Cancel</el-button>
-    <el-button type="success" @click="dialogVisible = false">Confirm</el-button>
+    <el-button  @click="dialogVisible = false">Confirm</el-button>
   </span>
 </el-dialog>
 </div>
@@ -114,6 +113,7 @@ export default {
          date: '2019-02-16',
          cmodel: 'T460',
          pmodel: 'iphone 8',
+         status: 'success',
         
          explain: 'Teslim Edildi'
       };
@@ -121,19 +121,13 @@ export default {
         tableData: Array(10).fill(item),
           search: '',
           dialogVisible: false,
-        status:'false',
+        
            durum: 'Completed'
       }
  
     },
   components: {
     CountTo
-  },
-  methods: {
-    handleSetLineChartData(type) {
-      this.$emit('handleSetLineChartData', type)
-    }
- 
   }
 }
 </script>

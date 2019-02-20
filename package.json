@@ -20,6 +20,11 @@
     "webpack": "^4.29.3"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.18.9",
+    "sass-loader": "^7.1.0",
+    "vue-count-to": "^1.0.13",
+    "webpack": "^4.29.3",
+    "node-sass": "^4.11.0"
+
   }
 }

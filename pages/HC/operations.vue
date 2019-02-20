@@ -90,7 +90,6 @@
 
 
 <script>
-import layout from '@/layouts/index'
   export default {
     layout: 'index',
     data() {

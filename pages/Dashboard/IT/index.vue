@@ -13,18 +13,18 @@
 <script>
 
 import PanelGroup from '@/components/Dashboard/PanelGroup.vue'
-import layout from '@/layouts/index'
 export default {
      layout: 'index',
      components: {
     PanelGroup
    
   },
-  data()
+  data: function()
   {
     return
     {
       status: 'false'
+      
     }
   },
     validate(data)

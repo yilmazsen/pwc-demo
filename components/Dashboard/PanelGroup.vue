@@ -115,13 +115,6 @@ export default {
     TransactionTableI,
     TransactionTableD,
     TransactionTableF
-  },
-  methods: {
-    handleSetLineChartData(type) {
-      this.$emit('handleSetLineChartData', type)
-    }
-    
- 
   }
 }
 </script>

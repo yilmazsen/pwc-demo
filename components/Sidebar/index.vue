@@ -4,10 +4,10 @@
   
   <div  class="navbar">
     
-    <hamburger :toggle-click="toggleSideBar"  class="hamburger-container"/>
+    <hamburger   class="hamburger-container"/>
     <breadcrumb />
       <search class="header-search-select" />
-    <el-dropdown class="avatar-container" trigger="click">
+    <el-dropdown class="avatar-container" >
     
       <div class="avatar-wrapper">
         <img src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" class="user-avatar">
@@ -20,7 +20,7 @@
           </el-dropdown-item>
         </router-link>
         <el-dropdown-item divided>
-          <span style="display:block;" >LogOut</span>
+          <span style="display:block;" >Log Out</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>

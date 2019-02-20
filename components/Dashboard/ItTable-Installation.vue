@@ -68,7 +68,7 @@
       label="Status"
      >
        <el-tag
-          :type="warning"
+           v-bind:type="warning"
           disable-transitions >{{durum}}</el-tag>
     </el-table-column>
 
@@ -88,7 +88,7 @@
       </template>
       <template >
          <el-tag
-          :type="warning"
+        v-bind:type="warning"
           disable-transitions @click="dialogInfo=true" >Details</el-tag>
         <el-button
           size="mini"
@@ -107,7 +107,7 @@
   title="Delete Operation"
   :visible.sync="dialogVisible"
   width="30%"
-  :before-close="handleClose">
+  >
   <span><b>Are you sure that you want to delete this record?</b></span>
   <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">Cancel</el-button>
@@ -119,7 +119,7 @@
   title="Information"
   :visible.sync="dialogInfo"
   width="30%"
-  :before-close="handleClose">
+  >
   <span><b>Test Details</b></span>
   <span slot="footer" class="dialog-footer">
     <el-button @click="dialogInfo = false" type="success">OK</el-button>
@@ -163,12 +163,6 @@ export default {
     },
   components: {
     CountTo
-  },
-  methods: {
-    handleSetLineChartData(type) {
-      this.$emit('handleSetLineChartData', type)
-    }
- 
   }
 }
 </script>
