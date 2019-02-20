@@ -19,13 +19,12 @@ export default {
     PanelGroup
    
   },
-  data: function()
-  {
+data: function () {
     return
     {
-      status: 'false'
-      
+      status: [{value:'false'}]
     }
+    
   },
     validate(data)
   {

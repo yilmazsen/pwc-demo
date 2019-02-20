@@ -66,7 +66,7 @@
      width="100px"
       label="Status">
        <el-tag
-          v-bind:tag="warning"
+         
           disable-transitions >{{durum}}</el-tag>
     </el-table-column>
 
@@ -93,7 +93,7 @@
       
       <template >
            <el-tag
-          :type="warning"
+          
           disable-transitions @click="dialogInfo=true" >Details</el-tag>
         <el-button
           size="mini"

@@ -67,7 +67,7 @@
       label="Status"
      >
        <el-tag
-          v-bind:tag="sucess"
+        
           disable-transitions >{{durum}}</el-tag>
     </el-table-column>
 

@@ -65,10 +65,10 @@
 
     <el-table-column
       width="100%"
-      label="Status"
+      label="Durum"
      >
        <el-tag
-           v-bind:type="warning"
+           
           disable-transitions >{{durum}}</el-tag>
     </el-table-column>
 
@@ -88,7 +88,7 @@
       </template>
       <template >
          <el-tag
-        v-bind:type="warning"
+        
           disable-transitions @click="dialogInfo=true" >Details</el-tag>
         <el-button
           size="mini"
@@ -117,7 +117,7 @@
 
   <el-dialog
   title="Information"
-  :visible.sync="dialogInfo"
+  
   width="30%"
   >
   <span><b>Test Details</b></span>
@@ -134,11 +134,12 @@
 <script>
 import CountTo from 'vue-count-to'
 export default {
-
-   props: ['status'],
-  data() {
+  
        
-
+props: ['status'],
+  data() {
+  
+   
       const item = {
        
         los: 'IFS / GTS / IT Support',
@@ -148,14 +149,12 @@ export default {
          date: '2019-02-16',
          cmodel: 'T460',
          pmodel: 'iphone 8',
-        
          explain: 'Kurulum Başlamadı...'
       };
       return {
         tableData: Array(10).fill(item),
           search: '',
           dialogVisible: false,
-          status:'',
            durum: 'not started',
            dialogInfo:'false'
       }
