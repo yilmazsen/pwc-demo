@@ -85,3 +85,5 @@ sw.*
 
 #hide DS_STORE
 .DS_Store
+#hide vscode
+.vscode
