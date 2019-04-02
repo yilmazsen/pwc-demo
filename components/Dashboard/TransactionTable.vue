@@ -66,7 +66,6 @@ export default {
       .then(response => {
         (this.loading = false), (this.facts = Object.values(response.data));
       });
-    console.log(Object.values(this.facts));
   },
   methods: {
     handleClose(done) {

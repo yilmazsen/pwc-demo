@@ -84,17 +84,17 @@
 
 
  </el-form-item>
-  <el-form-item  prop="date1" required> 
+  <el-form-item  prop="Hire_Date" required> 
     <el-col :span="11">
-      <el-date-picker  prefix-icon="el-icon-date" type="date" placeholder="Pick a starting date" v-model="sizeForm.date1" style="width: 100%;">
+      <el-date-picker  prefix-icon="el-icon-date" type="date" placeholder="Pick a starting date" v-model="sizeForm.Hire_Date" style="width: 100%;">
         
       </el-date-picker>
     </el-col>
     
-    <div v-if="show" prop="date2" label="Termination Date">
+    <div v-if="show" prop="Expire_Date" label="Termination Date">
         <el-col class="line" :span="2"> </el-col>
     <el-col :span="11" >
-      <el-date-picker type="date"  placeholder="Pick a termination date" v-model="sizeForm.date2" style="width: 100%;">
+      <el-date-picker type="date"  placeholder="Pick a termination date" v-model="sizeForm.Expire_Date" style="width: 100%;">
   
       </el-date-picker>
     </el-col>
@@ -130,18 +130,18 @@ import axios from 'axios'
           status:'false',
           titles:'',
           location:'',
-          date1: '',
-          date2: 'false'
+          Hire_Date: '',
+          Expire_Date: 'false'
         },
          rules: {
           name: [
             { required: true, message: 'Please input Employee name and surname', trigger: 'blur' },
            // { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
           ],
-          date1: [
+          Hire_Date: [
             { type: 'date', required: true, message: 'Please pick a date', trigger: 'change' }
           ],
-          date2: [
+          Expire_Date: [
             { type: 'date', required: true, message: 'Please pick a time', trigger: 'change' }
           ],
           los: [
@@ -169,7 +169,6 @@ import axios from 'axios'
     submitForm(formName) {
         this.$refs[formName].validate((valid) => {
         if (valid) {
-         debugger
          axios
         .post("https://pwcdemo-1c4d3.firebaseio.com/users.json", this.sizeForm)
         .then(
