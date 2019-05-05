@@ -82,8 +82,8 @@ dist
 
 # Service worker
 sw.*
+#hide vscode
+.vscode
 
 #hide DS_STORE
 .DS_Store
-#hide vscode
-.vscode
