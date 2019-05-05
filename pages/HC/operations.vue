@@ -180,12 +180,9 @@ import axios from 'axios'
         .then(response => this.$refs['sizeForm'].resetFields())
         }});
       }
-    }
-
-    
+    }   
   };
 </script>
-
 <style rel="stylesheet/scss" lang="scss" scoped>
 .log-btn {
   background: #0AC986;
