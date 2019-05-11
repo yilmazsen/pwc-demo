@@ -2,27 +2,45 @@
 <template>
   <div>
     <el-table border :data="facts" style="width: 100%" v-if="status">
-      <el-table-column label="#" type="index"></el-table-column>
-      <el-table-column label="Staff Name" prop="name"></el-table-column>
-      <el-table-column label="Los" prop="los"></el-table-column>
-      <el-table-column label="Title" prop="titles"></el-table-column>
-      <el-table-column label="Location" prop="location"></el-table-column>
-      <el-table-column label="Phone Model" prop="phoneModel"></el-table-column>
-      <el-table-column label="Computer Model" prop="computerModel"></el-table-column>
-      <el-table-column label="Date" prop="Hire_Date"></el-table-column>
-      <el-table-column label="Status">
+      <el-table-column width="50px" label="#" type="index"></el-table-column>
+
+      <el-table-column width="100px" label="Staff Name" prop="name"></el-table-column>
+
+      <el-table-column width="200px" label="LOS / Sub Los / Bottom Los" prop="LOS"></el-table-column>x
+      <el-table-column width="100px" label="Title" prop="titles"></el-table-column>
+
+      <el-table-column width="100px" label="Location" prop="location"></el-table-column>
+
+      <el-table-column width="100px" label="Phone Model" prop="bottomlos"></el-table-column>
+
+      <el-table-column width="150px" label="Computer Model" prop="sublos"></el-table-column>
+
+      <el-table-column width="100px" label="Date" prop="Hire_Date"></el-table-column>
+
+      <el-table-column width="100px" label="Status">
         <el-tag disable-transitions>{{durum}}</el-tag>
       </el-table-column>
 
-      <el-table-column label="Explanation" prop="info">
-        <el-tooltip
-          class="item"
-          effect="dark"
-          content="Bilgisayar Kurulum Esnasinda Hata Almistir. Tekrardan Kurulumuna Baslanmistir."
-          placement="top"
-        >
-          <el-button type="info">Info</el-button>
-        </el-tooltip>
+      <el-table-column width="200px" label="Explanation" prop="info">
+        <el-select placeholder="please select explaination">
+          <el-option
+            label="Sertifika Alınması Bekleniliyor"
+            value="Sertifika Alınması Bekleniliyor"
+          ></el-option>
+          <el-option
+            label="Lotus ve Windows Kullanıcı Hesaplarının Oluşturulması Bekleniliyor"
+            value="Director"
+          ></el-option>
+          <el-option
+            label="Bilgisayar Kurulum Aşamasında Hataya Düşmüştür. Tekrardan İşlem Başlatılmıştır"
+            value="Bilgisayar Kurulum Aşamasında Hataya Düşmüştür. Tekrardan İşlem Başlatılmıştır"
+          ></el-option>
+          <el-option label="Çantalanması Beklenilmektedir." value="Çantalanması Beklenilmektedir."></el-option>
+          <el-option
+            label="Bilgisayar Temin Edilmesi Beklenilmektedir."
+            value="Bilgisayar Temin Edilmesi Beklenilmektedir."
+          ></el-option>
+        </el-select>
       </el-table-column>
     </el-table>
   </div>
@@ -60,10 +78,7 @@ export default {
             titles: "",
             location: "",
             Hire_Date: "",
-            Expire_Date: "false",
-            info: "",
-            phoneModel: "",
-            computerModel: ""
+            Expire_Date: "false"
           },
       search: "",
       dialogVisible: false,

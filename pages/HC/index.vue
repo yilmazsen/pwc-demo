@@ -1,25 +1,22 @@
 <template>
-<div class="space">
-   <div class="dashboard-editor-container">
-     <transaction-table/>
-      
-  </div>
+  <div class="space">
+    <div class="dashboard-editor-container">
+      <transaction-table/>
+    </div>
   </div>
 </template>
 
 
 <script>
-
-import PanelGroup from '@/components/Dashboard/PanelGroup.vue'
-import TransactionTable from '@/components/Dashboard/TransactionTable.vue'
+import PanelGroup from "@/components/Dashboard/PanelGroup.vue";
+import TransactionTable from "@/components/Dashboard/TransactionTable.vue";
 export default {
-     layout: 'index',
-     components: {
+  layout: "index",
+  components: {
     PanelGroup,
     TransactionTable
-   
   }
-}
+};
 </script>
 
 
@@ -33,8 +30,7 @@ export default {
     padding: 16px 16px 0;
     margin-bottom: 32px;
   }
-  .space
-  {
+  .space {
     background-color: aqua;
   }
 }
