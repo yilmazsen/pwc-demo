@@ -1,184 +1,156 @@
 
 <template>
-<div>
-  <el-table
-   border
-    :data="tableData"
-    style="width: 100%"
-    v-if="status"
+  <div>
+    <el-table
+      border
+      :data="facts.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+      v-if="status"
+      :max-height="1000"
+      style="width: 100%"
     >
+      >
+      <el-table-column align="center" label="#" type="index"></el-table-column>
+      <el-table-column
+        width="150"
+        style="height: 20%"
+        align="center"
+        label="Staff Name"
+        prop="name"
+      ></el-table-column>
+      <el-table-column width="200" align="center" label="Los" prop="los"></el-table-column>
+      <el-table-column width="100" align="center" label="Title" prop="titles"></el-table-column>
+      <el-table-column width="100" align="center" label="Location" prop="location"></el-table-column>
+      <el-table-column sortable width="150" align="center" label="Phone Model" prop="phoneModel"></el-table-column>
+      <el-table-column
+        sortable
+        width="200"
+        align="center"
+        label="Computer Model"
+        prop="computerModel"
+      ></el-table-column>
+      <el-table-column width="100" align="center" label="Date" prop="Hire_Date"></el-table-column>
+      <el-table-column width="150" align="center" label="Status" prop="process_status_short">
+        <el-tag disable-transitions>{{sizeFormT.process_status_short}}</el-tag>
+      </el-table-column>
 
- <el-table-column
-    width="35%"
-      label="#"
-        type="index">
-    </el-table-column>
+      <el-table-column style="height: 20%" align="left">
+        <template slot="header">
+          <el-input v-model="search" size="mini" placeholder="Type to search"/>
+        </template>
 
-    <el-table-column
-    width="100%"
-      label="Staff Name"
-      prop="staffname">
-    </el-table-column>
-   
-
- <el-table-column
-   width="100%"
-      label="LOS / Sub Los / Bottom Los"
-      prop="los">
-    </el-table-column>
-
-
- <el-table-column
-  width="100%"
-      label="Title"
-      prop="title">
-    </el-table-column>
-
-
-  <el-table-column
-  width="90px"
-      label="Location"
-      prop="location">
-    </el-table-column>
-
-<el-table-column
-   width="70px"
-      label="Phone Model"
-      prop="pmodel">
-    </el-table-column>
-
-    <el-table-column
-       width="85px"
-      label="Computer Model"
-      prop="cmodel">
-    </el-table-column>
-
-
-
-
-
-        <el-table-column
-         width="90px"
-      label="Date"
-      prop="date">
-    </el-table-column>
-
-    <el-table-column
-      width="100%"
-      label="Durum"
-     >
-       <el-tag
-           
-          disable-transitions >{{durum}}</el-tag>
-    </el-table-column>
-
-
-
-
-
-    
-    <el-table-column
-     width="266px"
-      align="left">
-      <template slot="header" >
-        <el-input
-          v-model="search"
-          size="mini"
-          placeholder="Type to search"/>
-      </template>
-      <template >
-         <el-tag
-        
-          disable-transitions @click="dialogInfo=true" >Details</el-tag>
-        <el-button
-          size="mini"
-            type="primary"
-           icon="el-icon-edit" >Edit</el-button>
-        <el-button
-          size="mini"
-          type="danger"
-         @click="dialogVisible = true" icon="el-icon-delete">Delete</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
-
-
-  <el-dialog
-  title="Delete Operation"
-  :visible.sync="dialogVisible"
-  width="30%"
-  >
-  <span><b>Are you sure that you want to delete this record?</b></span>
-  <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">Cancel</el-button>
-    <el-button type="success" @click="dialogVisible = false">Confirm</el-button>
-  </span>
-</el-dialog>
-
-  <el-dialog
-  title="Information"
-  
-  width="30%"
-  >
-  <span><b>Test Details</b></span>
-  <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogInfo = false" type="success">OK</el-button>
-  </span>
-</el-dialog>
-
-
-
-</div>
+        <template style="width: 50% height:20%">
+          <el-tooltip type="info" plain class="item" effect="dark" content="name" placement="right">
+            <el-button>Info</el-button>
+          </el-tooltip>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
 </template>
 
+
+
+
+
+
+
 <script>
-import CountTo from 'vue-count-to'
+import CountTo from "vue-count-to";
+import axios from "axios";
+import _ from "lodash";
+import { error } from "util";
 export default {
-  
-       
-props: ['status'],
+  props: ["LOS"],
   data() {
-  
-   
-      const item = {
-       
-        los: 'IFS / GTS / IT Support',
-        staffname: 'Yilmaz SEN',
-        title: 'IT Specialist',
-        location:'Beşiktaş',
-         date: '2019-02-16',
-         cmodel: 'T460',
-         pmodel: 'iphone 8',
-         explain: 'Kurulum Başlamadı...'
-      };
-      return {
-        tableData: Array(10).fill(item),
-          search: '',
-          dialogVisible: false,
-           durum: 'not started',
-           dialogInfo:'false'
-      }
- 
-    },
+    return {
+      loading: true,
+      items: [],
+      facts: [],
+      dialogVisible: false,
+      status: true,
+      show: true,
+      jsonID: "",
+      Index: "",
+      centerDialogVisible: false,
+      sizeForm: this.post
+        ? { ...this.post }
+        : {
+            name: "",
+            los: "",
+            sublos: "",
+            bottomlos: "",
+            category: "",
+            status: "not started",
+            process_status: "not started",
+            process_status_short: "not started",
+            titles: "",
+            location: "",
+            Hire_Date: "",
+            Expire_Date: "false",
+            info: "",
+            phoneModel: "",
+            computerModel: ""
+          },
+      sizeFormT: this.post
+        ? { ...this.post }
+        : {
+            name: "",
+            los: "",
+            sublos: "",
+            bottomlos: "",
+            category: "",
+            status: "false",
+            process_status: "not started",
+            process_status_short: "not started",
+            titles: "",
+            location: "",
+            Hire_Date: "",
+            Expire_Date: "false",
+            info: ""
+          },
+      //   tableData: Array().fill(facts),
+      //     search: '',
+      //     dialogVisible: false
+      dialogVisible: false,
+
+      durum: "not started"
+    };
+  },
+  async created() {
+    await axios
+      .get("https://pwcdemo-1c4d3.firebaseio.com/users.json")
+      .then(response => {
+        const postArray = [];
+        for (const key in response.data) {
+          postArray.push({ ...response.data[key], id: key });
+        }
+        (this.loading = false), (this.facts = postArray);
+
+        // console.log(this.facts[0]);
+      });
+  },
+  methods: {
+    fetchDataFromTable(index, factID) {
+      this.sizeFormT = this.facts[index];
+      //    this.sizeFormT = this.sizeForm;
+      this.jsonID = this.facts[index].id;
+    }
+  },
   components: {
     CountTo
   }
-}
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-
-.test
-{
-  
+.test {
   height: 64px;
   width: 64px;
 }
 
-
 .panel-group {
   margin-top: 18px;
-  .card-panel-col{
+  .card-panel-col {
     margin-bottom: 32px;
   }
   .card-panel {
@@ -189,59 +161,58 @@ props: ['status'],
     overflow: hidden;
     color: #666;
     background: #fff;
-    box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
-    border-color: rgba(0, 0, 0, .05);
+    box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.05);
 
-      .card-panel-icon-wrapper {
-        color: #fff;
-      }
-      
-      .icon-message {
-        background: #36a3f7;
-      }
-      .icon-money {
-        background: #f4516c;
-      }
-      .icon-shopping {
-        background: #34bfa3
-      }
+    .card-panel-icon-wrapper {
+      color: #fff;
     }
-   
+
     .icon-message {
-      color: #36a3f7;
+      background: #36a3f7;
     }
     .icon-money {
-      color: #f4516c;
+      background: #f4516c;
     }
     .icon-shopping {
-      color: #34bfa3
-    }
-    .card-panel-icon-wrapper {
-      float: left;
-      margin: 14px 0 0 14px;
-      padding: 16px;
-      transition: all 0.38s ease-out;
-      border-radius: 6px;
-    }
-    .card-panel-icon {
-      float: left;
-      font-size: 48px;
-    }
-    .card-panel-description {
-      float: right;
-      font-weight: bold;
-      margin: 26px;
-      margin-left: 0px;
-      .card-panel-text {
-        line-height: 18px;
-        color: rgba(0, 0, 0, 0.45);
-        font-size: 16px;
-        margin-bottom: 12px;
-      }
-      .card-panel-num {
-        font-size: 20px;
-      }
+      background: #34bfa3;
     }
   }
 
+  .icon-message {
+    color: #36a3f7;
+  }
+  .icon-money {
+    color: #f4516c;
+  }
+  .icon-shopping {
+    color: #34bfa3;
+  }
+  .card-panel-icon-wrapper {
+    float: left;
+    margin: 14px 0 0 14px;
+    padding: 16px;
+    transition: all 0.38s ease-out;
+    border-radius: 6px;
+  }
+  .card-panel-icon {
+    float: left;
+    font-size: 48px;
+  }
+  .card-panel-description {
+    float: right;
+    font-weight: bold;
+    margin: 26px;
+    margin-left: 0px;
+    .card-panel-text {
+      line-height: 18px;
+      color: rgba(0, 0, 0, 0.45);
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+    .card-panel-num {
+      font-size: 20px;
+    }
+  }
+}
 </style>

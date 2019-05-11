@@ -122,6 +122,7 @@ export default {
             category: "",
             status: "false",
             process_status: "not started",
+             process_status_short: "not started",
             titles: "",
             location: "",
             Hire_Date: "",
