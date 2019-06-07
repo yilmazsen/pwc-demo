@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TransactionTable :status="true"/>
+    <TransactionTable/>
   </div>
 </template>
 <script>
