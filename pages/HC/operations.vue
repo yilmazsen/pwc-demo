@@ -71,24 +71,24 @@
           inactive-text="Staff"
         ></el-switch>
       </el-form-item>
-      <el-form-item prop="Hire_Date" required>
+      <el-form-item prop="hireDate" required>
         <el-col :span="11">
           <el-date-picker
             prefix-icon="el-icon-date"
             type="date"
             placeholder="Pick a starting date"
-            v-model="sizeForm.Hire_Date"
+            v-model="sizeForm.hireDate"
             style="width: 100%;"
           ></el-date-picker>
         </el-col>
 
-        <div v-if="show" prop="Expire_Date" label="Termination Date">
+        <div v-if="show" prop="expireDate" label="Termination Date">
           <el-col class="line" :span="2"></el-col>
           <el-col :span="11">
             <el-date-picker
               type="date"
               placeholder="Pick a termination date"
-              v-model="sizeForm.Expire_Date"
+              v-model="sizeForm.expireDate"
               style="width: 100%;"
             ></el-date-picker>
           </el-col>
@@ -121,12 +121,12 @@ export default {
             bottomlos: "",
             category: "",
             status: "false",
-            process_status: "not started",
-             process_status_short: "not started",
+            procesStatus: "not started",
+            procesStatuShort: "not started",
             titles: "",
             location: "",
-            Hire_Date: "",
-            Expire_Date: "false",
+            hireDate: "",
+            expireDate: "false",
             info: "",
             phoneModel: "",
             computerModel: ""
@@ -140,7 +140,7 @@ export default {
           }
           // { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
         ],
-        Hire_Date: [
+        hireDate: [
           {
             type: "date",
             required: true,
@@ -148,7 +148,7 @@ export default {
             trigger: "change"
           }
         ],
-        Expire_Date: [
+        expireDate: [
           {
             type: "date",
             required: true,
@@ -281,20 +281,20 @@ export default {
       this.selectDevicesModel();
       this.$refs[formName].validate(valid => {
         if (valid) {
-          axios
-            .post(
-              "https://pwcdemo-1c4d3.firebaseio.com/users.json",
-              this.sizeForm
-            )
-            .then(response =>
-              this.$message({
-                message: "Congrats, This user has been added.",
-                type: "success"
-              })
-            )
-            .then(response => this.$refs["sizeForm"].resetFields());
+          this.addUser();
         }
       });
+    },
+    addUser() {
+      axios
+        .post("https://pwcdemo-1c4d3.firebaseio.com/users.json", this.sizeForm)
+        .then(response =>
+          this.$message({
+            message: "Congrats, This user has been added.",
+            type: "success"
+          })
+        )
+        .then(response => this.$refs["sizeForm"].resetFields());
     }
   }
 };

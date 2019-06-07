@@ -1,14 +1,7 @@
 
 <template>
   <div>
-    <el-table
-      border
-      :data="facts.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
-      v-if="status"
-      :max-height="1000"
-      style="width: 100%"
-    >
-      >
+    <el-table border :data="facts" v-if="status" :max-height="1000" style="width: 100%">
       <el-table-column align="center" label="#" type="index"></el-table-column>
       <el-table-column
         width="150"
@@ -28,9 +21,9 @@
         label="Computer Model"
         prop="computerModel"
       ></el-table-column>
-      <el-table-column width="100" align="center" label="Date" prop="Hire_Date"></el-table-column>
-      <el-table-column width="150" align="center" label="Status" prop="process_status_short">
-        <el-tag disable-transitions>{{sizeFormT.process_status_short}}</el-tag>
+      <el-table-column width="100" align="center" label="Date" prop="hireDate"></el-table-column>
+      <el-table-column width="150" align="center" label="Status" prop="procesStatuShort">
+        <el-tag disable-transitions>{{sizeFormT.procesStatuShort}}</el-tag>
       </el-table-column>
 
       <el-table-column style="height: 20%" align="center">
@@ -93,9 +86,9 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="Type Of Report" prop="process_status" required>
-          <el-select v-model="sizeFormT.process_status" placeholder="please select report">
-              <el-option
+        <el-form-item label="Type Of Report" prop="procesStatus" required>
+          <el-select v-model="sizeFormT.procesStatus" placeholder="please select report">
+            <el-option
               label=" Bilgisayar Kurulumunun Tamamlanması Bekleniliyor. "
               value=" Bilgisayar Kurulumunun Tamamlanması Bekleniliyor. "
             ></el-option>
@@ -115,38 +108,29 @@
               label=" Kullanıcının guid mail'nin gelmesi beklenilmektedir.  "
               value=" Kullanıcının guid mail'nin gelmesi beklenilmektedir.  "
             ></el-option>
-            <el-option label=" Bilgisayarın kurulumu yapılırken hata oluştu. Tekrar başlatıldı. " value=" Bilgisayarın kurulumu yapılırken hata oluştu. Tekrar başlatıldı. "></el-option>
-            <el-option label=" Bilgisayar Hazırlandı. Teslim Edilmesi Beklenilmektedir. " value=" Bilgisayar Hazırlandı. Teslim Edilmesi Beklenilmektedir. "></el-option>
-            
+            <el-option
+              label=" Bilgisayarın kurulumu yapılırken hata oluştu. Tekrar başlatıldı. "
+              value=" Bilgisayarın kurulumu yapılırken hata oluştu. Tekrar başlatıldı. "
+            ></el-option>
+            <el-option
+              label=" Bilgisayar Hazırlandı. Teslim Edilmesi Beklenilmektedir. "
+              value=" Bilgisayar Hazırlandı. Teslim Edilmesi Beklenilmektedir. "
+            ></el-option>
           </el-select>
         </el-form-item>
 
-
-<el-form-item label="Type Of Report" prop="process_status_short" required>
-          <el-select v-model="sizeFormT.process_status_short" placeholder="please select report">
-            <el-option
-              label="Working progress"
-              value="Working progress"
-            ></el-option>
-            <el-option
-              label="Ready"
-              value="Ready"
-            ></el-option>
-<el-option
-              label="not started"
-              value="not started"
-            ></el-option>
-
+        <el-form-item label="Type Of Report" prop="procesStatuShort" required>
+          <el-select v-model="sizeFormT.procesStatuShort" placeholder="please select report">
+            <el-option label="Working progress" value="Working progress"></el-option>
+            <el-option label="Ready" value="Ready"></el-option>
+            <el-option label="not started" value="not started"></el-option>
           </el-select>
         </el-form-item>
-
-
-
       </el-form>
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="success" @click="UpdateForm()">Update</el-button>
+        <el-button type="success" @click="updateForm()">Update</el-button>
       </span>
     </el-dialog>
   </div>
@@ -185,12 +169,12 @@ export default {
             bottomlos: "",
             category: "",
             status: "not started",
-            process_status: "not started",
-            process_status_short: "not started",
+            procesStatus: "not started",
+            procesStatuShort: "not started",
             titles: "",
             location: "",
-            Hire_Date: "",
-            Expire_Date: "false",
+            hireDate: "",
+            expireDate: "false",
             info: "",
             phoneModel: "",
             computerModel: ""
@@ -203,14 +187,16 @@ export default {
             sublos: "",
             bottomlos: "",
             category: "",
-            status: "false",
-            process_status: "not started",
-            process_status_short: "not started",
+            status: "not started",
+            procesStatus: "not started",
+            procesStatuShort: "not started",
             titles: "",
             location: "",
-            Hire_Date: "",
-            Expire_Date: "false",
-            info: ""
+            hireDate: "",
+            expireDate: "false",
+            info: "",
+            phoneModel: "",
+            computerModel: ""
           },
       rules: {
         name: [
@@ -256,7 +242,7 @@ export default {
 
       search: "",
       dialogVisible: false,
-
+      api: "https://pwcdemo-1c4d3.firebaseio.com/users/",
       durum: "not started"
     };
   },
@@ -269,7 +255,6 @@ export default {
           postArray.push({ ...response.data[key], id: key });
         }
         (this.loading = false), (this.facts = postArray);
-     
 
         // console.log(this.facts[0]);
       });
@@ -280,7 +265,17 @@ export default {
       //    this.sizeFormT = this.sizeForm;
       this.jsonID = this.facts[index].id;
     },
-    UpdateForm() {
+    processOne() {
+      this.dialogVisible = true;
+      fetchDataFromTable(scope.$index, scope.row.id);
+    },
+    fetchingData() {
+      return facts.filter(
+        data =>
+          !search || data.name.toLowerCase().includes(search.toLowerCase())
+      );
+    },
+    updateForm() {
       this.$refs.sizeFormT.validate(valid => {
         if (valid) {
           axios
@@ -309,9 +304,7 @@ export default {
     deleteRow(index, factID) {
       console.log("index: ", factID);
       axios
-        .delete(
-          "https://pwcdemo-1c4d3.firebaseio.com/users/" + factID + ".json"
-        )
+        .delete("${api}" + factID + ".json")
         .then(response => {
           this.facts.splice(index, 1);
           this.$message({

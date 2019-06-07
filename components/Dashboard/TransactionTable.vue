@@ -13,7 +13,7 @@
       <el-table-column label="Title" prop="titles"></el-table-column>
 
       <el-table-column label="Location" prop="location" width="75px"></el-table-column>
-      <el-table-column label="Date" prop="Hire_Date" width="99px"></el-table-column>
+      <el-table-column label="Date" prop="hireDate" width="99px"></el-table-column>
 
       <el-table-column align="right">
         <template slot="header">
@@ -120,24 +120,24 @@
             inactive-text="Staff"
           ></el-switch>
         </el-form-item>
-        <el-form-item prop="Hire_Date">
+        <el-form-item prop="hireDate">
           <el-col :span="11">
             <el-date-picker
               prefix-icon="el-icon-date"
               type="date"
               placeholder="Pick a starting date"
-              v-model="sizeFormT.Hire_Date"
+              v-model="sizeFormT.hireDate"
               style="width: 100%;"
             ></el-date-picker>
           </el-col>
 
-          <div v-if="show" prop="Expire_Date" label="Termination Date">
+          <div v-if="show" prop="expireDate" label="Termination Date">
             <el-col class="line" :span="2"></el-col>
             <el-col :span="11">
               <el-date-picker
                 type="date"
                 placeholder="Pick a termination date"
-                v-model="sizeFormT.Expire_Date"
+                v-model="sizeFormT.expireDate"
                 style="width: 100%;"
               ></el-date-picker>
             </el-col>
@@ -188,12 +188,12 @@ export default {
             bottomlos: "",
             category: "",
             status: "not started",
-            process_status: "not started",
-             process_status_short: "not started",
+            procesStatus: "not started",
+            procesStatuShort: "not started",
             titles: "",
             location: "",
-            Hire_Date: "",
-            Expire_Date: "false",
+            hireDate: "",
+            expireDate: "false",
             info: "",
             phoneModel: "",
             computerModel: ""
@@ -206,14 +206,16 @@ export default {
             sublos: "",
             bottomlos: "",
             category: "",
-            status: "false",
-            process_status: "not started",
-             process_status_short: "not started",
+            status: "not started",
+            procesStatus: "not started",
+            procesStatuShort: "not started",
             titles: "",
             location: "",
-            Hire_Date: "",
-            Expire_Date: "false",
-            info: ""
+            hireDate: "",
+            expireDate: "false",
+            info: "",
+            phoneModel: "",
+            computerModel: ""
           },
       rules: {
         name: [
@@ -276,7 +278,7 @@ export default {
           postArray.push({ ...response.data[key], id: key });
         }
         (this.loading = false), (this.facts = postArray);
-        console.log(this.facts);
+        // console.log(this.facts);
 
         // console.log(this.facts[0]);
       });

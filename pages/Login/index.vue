@@ -45,11 +45,11 @@ export default {
       password: "admin",
       options: [
         {
-          value: "HC",
+          value: "hc",
           label: "HC Staff"
         },
         {
-          value: "IT",
+          value: "it",
           label: "IT Staff"
         }
       ],
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     gotoPage: function() {
-      if (this.value == "IT") {
+      if (this.value == "it") {
         this.$router.push("/" + this.value);
       } else {
         this.$router.push("/" + this.value);

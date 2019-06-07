@@ -1,14 +1,7 @@
 
 <template>
   <div>
-    <el-table
-      border
-      :data="facts.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
-      v-if="status"
-      :max-height="1000"
-      style="width: 100%"
-    >
-      >
+    <el-table border :data="facts" v-if="status" :max-height="1000" style="width: 100%">
       <el-table-column align="center" label="#" type="index"></el-table-column>
       <el-table-column
         width="150"
@@ -28,9 +21,9 @@
         label="Computer Model"
         prop="computerModel"
       ></el-table-column>
-      <el-table-column width="100" align="center" label="Date" prop="Hire_Date"></el-table-column>
-      <el-table-column width="150" align="center" label="Status" prop="process_status_short">
-        <el-tag disable-transitions>{{sizeFormT.process_status_short}}</el-tag>
+      <el-table-column width="100" align="center" label="Date" prop="hireDate"></el-table-column>
+      <el-table-column width="150" align="center" label="Status" prop="procesStatuShort">
+        <el-tag disable-transitions>{{sizeFormT.procesStatuShort}}</el-tag>
       </el-table-column>
 
       <el-table-column style="height: 20%" align="left">
@@ -55,7 +48,7 @@
 
 
 <script>
-import CountTo from "vue-count-to";
+import countTo from "vue-count-to";
 import axios from "axios";
 import _ from "lodash";
 import { error } from "util";
@@ -69,8 +62,8 @@ export default {
       dialogVisible: false,
       status: true,
       show: true,
-      jsonID: "",
-      Index: "",
+      jsonId: "",
+      index: "",
       centerDialogVisible: false,
       sizeForm: this.post
         ? { ...this.post }
@@ -81,12 +74,12 @@ export default {
             bottomlos: "",
             category: "",
             status: "not started",
-            process_status: "not started",
-            process_status_short: "not started",
+            procesStatus: "not started",
+            procesStatuShort: "not started",
             titles: "",
             location: "",
-            Hire_Date: "",
-            Expire_Date: "false",
+            hireDate: "",
+            expireDate: "false",
             info: "",
             phoneModel: "",
             computerModel: ""
@@ -99,21 +92,23 @@ export default {
             sublos: "",
             bottomlos: "",
             category: "",
-            status: "false",
-            process_status: "not started",
-            process_status_short: "not started",
+            status: "not started",
+            procesStatus: "not started",
+            procesStatuShort: "not started",
             titles: "",
             location: "",
-            Hire_Date: "",
-            Expire_Date: "false",
-            info: ""
+            hireDate: "",
+            expireDate: "false",
+            info: "",
+            phoneModel: "",
+            computerModel: ""
           },
       //   tableData: Array().fill(facts),
       //     search: '',
       //     dialogVisible: false
       dialogVisible: false,
 
-      durum: "not started"
+      mainStatus: "not started"
     };
   },
   async created() {
@@ -126,18 +121,24 @@ export default {
         }
         (this.loading = false), (this.facts = postArray);
 
-        // console.log(this.facts[0]);
+        //  console.log(this.facts[0]);
       });
   },
   methods: {
-    fetchDataFromTable(index, factID) {
+    fetchDataFromTable(index, factId) {
       this.sizeFormT = this.facts[index];
       //    this.sizeFormT = this.sizeForm;
-      this.jsonID = this.facts[index].id;
+      this.jsonId = this.facts[index].id;
+    },
+    fetchingData() {
+      facts.filter(
+        data =>
+          !search || data.name.toLowerCase().includes(search.toLowerCase())
+      );
     }
   },
   components: {
-    CountTo
+    countTo
   }
 };
 </script>

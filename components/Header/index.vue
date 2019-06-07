@@ -15,13 +15,13 @@
       <el-menu-item index="2">
         <i class="el-icon-edit"></i>
         <span class="title"></span>
-        <nuxt-link to="/HC/operations">Operations</nuxt-link>
+        <nuxt-link to="/hc/operations">Operations</nuxt-link>
       </el-menu-item>
 
       <el-menu-item index="3">
         <span class="title"></span>
         <i class="el-icon-view b"></i>
-        <nuxt-link to="/HC" class="link">Employees</nuxt-link>
+        <nuxt-link to="/hc" class="link">Employees</nuxt-link>
       </el-menu-item>
     </el-menu>
   </el-col>
@@ -36,7 +36,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .el-menu-vertical-demo {
   min-height: 950px;
   height: 100%;
