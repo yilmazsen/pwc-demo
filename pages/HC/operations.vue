@@ -111,6 +111,7 @@ export default {
     return {
       status: true,
       show: false,
+      fullLink: "https://pwcdemo-1c4d3.firebaseio.com/users.json",
       centerDialogVisible: false,
       sizeForm: this.post
         ? { ...this.post }
@@ -138,7 +139,6 @@ export default {
             message: "Please input Employee name and surname",
             trigger: "blur"
           }
-          // { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
         ],
         hireDate: [
           {
@@ -287,7 +287,7 @@ export default {
     },
     addUser() {
       axios
-        .post("https://pwcdemo-1c4d3.firebaseio.com/users.json", this.sizeForm)
+        .post(`${this.fullLink}`, this.sizeForm)
         .then(response =>
           this.$message({
             message: "Congrats, This user has been added.",

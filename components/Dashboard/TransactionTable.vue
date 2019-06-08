@@ -24,7 +24,7 @@
           <el-button
             size="mini"
             type="primary"
-            @click="dialogVisible = true;fetchDataFromTable(scope.$index,scope.row.id)"
+            @click="fetchingFunction(scope)"
             icon="el-icon-edit"
           >Edit</el-button>
 
@@ -283,6 +283,10 @@ export default {
       this.sizeFormT = this.facts[index];
 
       this.jsonID = this.facts[index].id;
+    },
+    fetchingFunction(scope) {
+      dialogVisible = true;
+      fetchDataFromTable(scope.$index, scope.row.id);
     },
     UpdateForm() {
       this.$refs.sizeFormT.validate(valid => {

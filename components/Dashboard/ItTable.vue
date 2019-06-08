@@ -35,7 +35,7 @@
           <el-button
             size="mini"
             type="success"
-            @click="dialogVisible = true;fetchDataFromTable(scope.$index,scope.row.id)"
+            @click="fetchingFunction(scope)"
             icon="el-icon-edit"
           >Edit</el-button>
         </template>
@@ -261,6 +261,10 @@ export default {
         data =>
           !search || data.name.toLowerCase().includes(search.toLowerCase())
       );
+    },
+    fetchingFunction(scope) {
+      dialogVisible = true;
+      fetchDataFromTable(scope.$index, scope.row.id);
     },
     updateForm() {
       this.$refs.sizeFormT.validate(valid => {
