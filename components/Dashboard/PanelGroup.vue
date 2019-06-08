@@ -11,7 +11,6 @@ export default {
     return {
       search: "",
       dialogVisible: false,
-
       durum: "not started"
     };
   },

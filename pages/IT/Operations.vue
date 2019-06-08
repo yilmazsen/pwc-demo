@@ -1,7 +1,7 @@
 <template>
   <div class="space">
     <div class="dashboard-editor-container">
-      <transaction-table/>
+      <TransactionTable/>
     </div>
   </div>
 </template>

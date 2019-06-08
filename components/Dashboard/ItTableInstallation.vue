@@ -56,6 +56,8 @@ export default {
   props: ["LOS"],
   data() {
     return {
+      link: "https://pwcdemo-1c4d3.firebaseio.com/users/",
+      fileType: ".json",
       loading: true,
       items: [],
       facts: [],
@@ -103,31 +105,25 @@ export default {
             phoneModel: "",
             computerModel: ""
           },
-      //   tableData: Array().fill(facts),
-      //     search: '',
-      //     dialogVisible: false
-      dialogVisible: false,
 
+      dialogVisible: false,
+      fullLink: "https://pwcdemo-1c4d3.firebaseio.com/users.json",
       mainStatus: "not started"
     };
   },
   async created() {
-    await axios
-      .get("https://pwcdemo-1c4d3.firebaseio.com/users.json")
-      .then(response => {
-        const postArray = [];
-        for (const key in response.data) {
-          postArray.push({ ...response.data[key], id: key });
-        }
-        (this.loading = false), (this.facts = postArray);
-
-        //  console.log(this.facts[0]);
-      });
+    await axios.get(`${this.fullLink}`).then(response => {
+      const postArray = [];
+      for (const key in response.data) {
+        postArray.push({ ...response.data[key], id: key });
+      }
+      this.loading = false;
+      this.facts = postArray;
+    });
   },
   methods: {
     fetchDataFromTable(index, factId) {
       this.sizeFormT = this.facts[index];
-      //    this.sizeFormT = this.sizeForm;
       this.jsonId = this.facts[index].id;
     },
     fetchingData() {

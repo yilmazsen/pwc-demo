@@ -38,13 +38,6 @@
             @click="dialogVisible = true;fetchDataFromTable(scope.$index,scope.row.id)"
             icon="el-icon-edit"
           >Edit</el-button>
-
-          <el-button
-            size="mini"
-            type="danger"
-            @click.native.prevent="deleteRow(scope.$index,scope.row.id)"
-            icon="el-icon-delete"
-          >Delete</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -151,6 +144,8 @@ export default {
   props: ["LOS"],
   data() {
     return {
+      link: "https://pwcdemo-1c4d3.firebaseio.com/users/",
+      fileType: ".json",
       loading: true,
       items: [],
       facts: [],
@@ -205,7 +200,6 @@ export default {
             message: "Employee name and surname must not be empty.",
             trigger: "blur"
           }
-          // { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
         ],
         los: [
           {
@@ -236,33 +230,26 @@ export default {
           }
         ]
       },
-      //   tableData: Array().fill(facts),
-      //     search: '',
-      //     dialogVisible: false
 
       search: "",
       dialogVisible: false,
-      api: "https://pwcdemo-1c4d3.firebaseio.com/users/",
+      fullLink: "https://pwcdemo-1c4d3.firebaseio.com/users.json",
       durum: "not started"
     };
   },
   async created() {
-    await axios
-      .get("https://pwcdemo-1c4d3.firebaseio.com/users.json")
-      .then(response => {
-        const postArray = [];
-        for (const key in response.data) {
-          postArray.push({ ...response.data[key], id: key });
-        }
-        (this.loading = false), (this.facts = postArray);
-
-        // console.log(this.facts[0]);
-      });
+    await axios.get(`${this.fullLink}`).then(response => {
+      const postArray = [];
+      for (const key in response.data) {
+        postArray.push({ ...response.data[key], id: key });
+      }
+      this.loading = false;
+      this.facts = postArray;
+    });
   },
   methods: {
     fetchDataFromTable(index, factID) {
       this.sizeFormT = this.facts[index];
-      //    this.sizeFormT = this.sizeForm;
       this.jsonID = this.facts[index].id;
     },
     processOne() {
@@ -280,9 +267,7 @@ export default {
         if (valid) {
           axios
             .put(
-              "https://pwcdemo-1c4d3.firebaseio.com/users/" +
-                this.jsonID +
-                ".json",
+              `${this.link}` + this.jsonID + `${this.fileType}`,
               this.sizeFormT
             )
             .then(response => {
@@ -300,24 +285,6 @@ export default {
             });
         }
       });
-    },
-    deleteRow(index, factID) {
-      console.log("index: ", factID);
-      axios
-        .delete("${api}" + factID + ".json")
-        .then(response => {
-          this.facts.splice(index, 1);
-          this.$message({
-            message: "Congrats, This user has been deleted.",
-            type: "success"
-          });
-        })
-        .catch(error => {
-          this.$message({
-            message: error,
-            type: "error"
-          });
-        });
     }
   },
   components: {
