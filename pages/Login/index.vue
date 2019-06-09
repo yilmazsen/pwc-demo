@@ -1,69 +1,71 @@
 <template>
-<div class="bg">
-<el-form   class="login-form">
-<div class="logo"></div>
-  <el-form-item class="form-group log-status">
-    <el-input v-model="username"  placeholder="Username" auto-complete="on" />
-  </el-form-item>
-  <el-form-item class="form-group log-status">
-    <el-input v-model="password" name="pass" :type="password" placeholder="Password" auto-complete="on" />
-  </el-form-item>
- 
-  <el-form-item >
- <el-select class="form-group log-status SelectionSize" v-model="value" placeholder="Select a user type">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-   </el-form-item>
+  <div class="bg">
+    <el-form class="login-form">
+      <div class="logo"></div>
+      <el-form-item class="form-group log-status">
+        <el-input v-model="username" placeholder="Username" auto-complete="on"/>
+      </el-form-item>
+      <el-form-item class="form-group log-status">
+        <el-input
+          v-model="password"
+          name="pass"
+          :type="password"
+          placeholder="Password"
+          auto-complete="on"
+        />
+      </el-form-item>
 
+      <el-form-item>
+        <el-select
+          class="form-group log-status SelectionSize"
+          v-model="value"
+          placeholder="Select a user type"
+        >
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+        </el-select>
+      </el-form-item>
 
-  <el-form-item>
-    <el-button @click="gotoPage()" type="primary" class="log-btn">
-      Sign in
-    </el-button >
-  </el-form-item>
-
-
-</el-form>
-
-
-
-    
-   </div>
+      <el-form-item>
+        <el-button @click="gotoPage()" type="primary" class="log-btn">Sign in</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 
 <script>
-export default
-{
-  data()
-  {
-     return {
-        username: 'admin',
-        password: 'admin',
-        options: [{
-          value: 'HC',
-          label: 'HC Staff'
-        }, {
-          value: 'IT',
-          label: 'IT Staff'
-        }],
-        value: ''
-        
+export default {
+  data() {
+    return {
+      username: "admin",
+      password: "admin",
+      options: [
+        {
+          value: "hc",
+          label: "HC Staff"
+        },
+        {
+          value: "it",
+          label: "IT Staff"
         }
-      
+      ],
+      value: ""
+    };
   },
-  methods:
-  {
-    gotoPage: function()
-    {
-       this.$router.push('/Dashboard/'+this.value);
+  methods: {
+    gotoPage: function() {
+      if (this.value == "it") {
+        this.$router.push("/" + this.value);
+      } else {
+        this.$router.push("/" + this.value);
+      }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -74,21 +76,20 @@ export default
   -webkit-box-sizing: border-box;
   font-family: arial;
 }
- 
+
 h1 {
   color: #ccc;
   text-align: center;
-  font-family: 'Vibur', cursive;
+  font-family: "Vibur", cursive;
   font-size: 50px;
 }
-.logo
-{
-    background-image:url('https://www.cepde.net/caches/hyuz/cmVzaW1sZXIvMjAxOC95YW5kZXhfbGF1bmNoZXI=.png');
-    background-repeat: no-repeat;
-    widows: 100px;
-    height: 100px;
-    margin-left: 95px;
-    margin-bottom: 50px;
+.logo {
+  background-image: url("https://www.cepde.net/caches/hyuz/cmVzaW1sZXIvMjAxOC95YW5kZXhfbGF1bmNoZXI=.png");
+  background-repeat: no-repeat;
+  widows: 100px;
+  height: 100px;
+  margin-left: 95px;
+  margin-bottom: 50px;
 }
 .login-form {
   width: 350px;
@@ -125,9 +126,10 @@ h1 {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-.form-control:focus, .form-control:focus + .fa {
-  border-color: #10CE88;
-  color: #10CE88;
+.form-control:focus,
+.form-control:focus + .fa {
+  border-color: #10ce88;
+  color: #10ce88;
 }
 
 .form-group .fa {
@@ -143,19 +145,19 @@ h1 {
   animation: wrong-log 0.3s;
 }
 
-.log-status.wrong-entry .form-control, .wrong-entry .form-control + .fa {
+.log-status.wrong-entry .form-control,
+.wrong-entry .form-control + .fa {
   border-color: #ed1c24;
   color: #ed1c24;
 }
 
-.SelectionSize
-{
+.SelectionSize {
   width: 100%;
   display: inline-block;
 }
 
 .log-btn {
-  background: #0AC986;
+  background: #0ac986;
   display: inline-block;
   width: 100%;
   font-size: 16px;
@@ -171,13 +173,13 @@ h1 {
 
 .link {
   text-decoration: none;
-  color:#ffffff;
+  color: #ffffff;
   font-size: 15px;
   margin-bottom: 15px;
 }
 .link:hover {
   text-decoration: underline;
-  color: #FF9000;
+  color: #ff9000;
 }
 
 .alert {
@@ -188,37 +190,45 @@ h1 {
 }
 
 @-moz-keyframes wrong-log {
-  0%, 100% {
+  0%,
+  100% {
     left: 0px;
   }
-  20% , 60% {
+  20%,
+  60% {
     left: 15px;
   }
-  40% , 80% {
+  40%,
+  80% {
     left: -15px;
   }
 }
 @-webkit-keyframes wrong-log {
-  0%, 100% {
+  0%,
+  100% {
     left: 0px;
   }
-  20% , 60% {
+  20%,
+  60% {
     left: 15px;
   }
-  40% , 80% {
+  40%,
+  80% {
     left: -15px;
   }
 }
 @keyframes wrong-log {
-  0%, 100% {
+  0%,
+  100% {
     left: 0px;
   }
-  20% , 60% {
+  20%,
+  60% {
     left: 15px;
   }
-  40% , 80% {
+  40%,
+  80% {
     left: -15px;
   }
 }
-
 </style>

@@ -3,25 +3,25 @@
     <el-menu
       default-active="1"
       class="el-menu-vertical-demo"
-      background-color="#545c64"
-      text-color="#fff"
+      background-color="#F7882F"
+      text-color="#ccc"
       active-text-color="#ffd04b"
     >
       <el-menu-item index="1">
         <i class="el-icon-menu"></i>
         <span class="title"></span>
-        <nuxt-link to="/" class="link">Dashboard</nuxt-link>
+        <nuxt-link to="/">Dashboard</nuxt-link>
       </el-menu-item>
       <el-menu-item index="2">
         <i class="el-icon-edit"></i>
         <span class="title"></span>
-        <nuxt-link to="/hc/operations">Operations</nuxt-link>
+        <nuxt-link to="/it/Operations">Operations</nuxt-link>
       </el-menu-item>
 
       <el-menu-item index="3">
         <span class="title"></span>
         <i class="el-icon-view b"></i>
-        <nuxt-link to="/hc" class="link">Employees</nuxt-link>
+        <nuxt-link to="/it">Employees</nuxt-link>
       </el-menu-item>
     </el-menu>
   </el-col>

@@ -1,7 +1,7 @@
 <template>
   <div class="space">
     <div class="dashboard-editor-container">
-      <transaction-table/>
+      <ItTable/>
     </div>
   </div>
 </template>
@@ -9,12 +9,12 @@
 
 <script>
 import PanelGroup from "@/components/Dashboard/PanelGroup.vue";
-import TransactionTable from "@/components/Dashboard/TransactionTable.vue";
+import ItTable from "@/components/Dashboard/ItTableInstallation.vue";
 export default {
-  layout: "index",
+  layout: "indexIT",
   components: {
     PanelGroup,
-    TransactionTable
+    ItTable
   }
 };
 </script>
